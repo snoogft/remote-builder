@@ -2,5 +2,11 @@ steps:
    - id: 'build remote-builder'
      name: 'gcr.io/cloud-builders/docker'
      args: [ 'build', '-t', 'eu.gcr.io/$PROJECT_ID/remote-builder', '.' ]
+   - id: 'packer build'
+     name: 'hashicorp/packer:${_PACKER_VERSION}'
+     args: [ 'build', '-var', 'project_id=$PROJECT_ID', '-var', 'zone=$_ZONE' 'packer.json']
 images: ['eu.gcr.io/$PROJECT_ID/remote-builder']
 timeout: 900s
+substitutions:
+  _PACKER_VERSION: 1.7.3
+  _ZONE: europe-central2-a

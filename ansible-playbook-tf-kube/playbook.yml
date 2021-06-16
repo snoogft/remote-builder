@@ -1,0 +1,7 @@
+---
+- name: 'Provision remote-builder'
+  hosts: default
+  become: true
+  roles:
+    - { role: diodonfrost.terraform, terraform_version: 0.14.11 }
+    - { role: andrewrothstein.kubectl, kubectl_ver: v1.20.6 }

@@ -1,0 +1,31 @@
+{
+  "builders": [
+    {
+      "type": "googlecompute",
+      "image_name": "remote-builder-{{timestamp}}",
+      "image_description": "Machine used for configuring kubernetes and running terraform",
+      "instance_name": "remote-builder-{{uuid}}",
+      "project_id": "{{user `project_id`}}",
+      "source_image": "debian-10-buster-v20210609",
+      "source_image_family": "debian-10",
+      "ssh_username": "packer",
+      "zone": "{{user `zone`}}",
+      "machine_type": "f1-micro",
+      "labels": {"purpose":"remote-builder"}
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo DEBIAN_FRONTEND=noninteractive apt-get update",
+        "sudo apt-get install python unzip git -yq"
+      ]
+    },
+    {
+      "type": "ansible",
+      "playbook_file": "./ansible-playbook-tf-kube/playbook.yml",
+      "galaxy_file": "./ansible-playbook-tf-kube/roles/requirements.yml"
+    }
+  ]
+}
