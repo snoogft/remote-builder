@@ -53,7 +53,7 @@ while [ "$(ssh 'printf pass')" != "pass" ]; do
 done
 
 ${GCLOUD} compute scp "${SSH_ARGS}" --compress --recurse \
-       $(pwd) "${USERNAME}"@"${INSTANCE_NAME}":"${REMOTE_WORKSPACE}" \
+       "$(pwd)" "${USERNAME}"@"${INSTANCE_NAME}":"${REMOTE_WORKSPACE}" \
        --ssh-key-file=${KEYNAME}
 
 ssh "${COMMAND}"
