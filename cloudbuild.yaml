@@ -4,7 +4,7 @@ steps:
      args: [ 'build', '-t', 'eu.gcr.io/$PROJECT_ID/remote-builder', '.' ]
    - id: 'packer build'
      name: 'hashicorp/packer:${_PACKER_VERSION}'
-     args: [ 'build', '-var', 'project_id=$PROJECT_ID', '-var', 'zone=$_ZONE' 'packer.json']
+     args: [ 'build', '-var', 'project_id=$PROJECT_ID', '-var', 'zone=$_ZONE', 'packer.json']
 images: ['eu.gcr.io/$PROJECT_ID/remote-builder']
 timeout: 900s
 substitutions:
