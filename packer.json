@@ -19,11 +19,11 @@
       "type": "shell",
       "inline": [
         "sudo DEBIAN_FRONTEND=noninteractive apt-get update",
-        "sudo apt-get install python unzip git -yq"
+        "sudo apt-get install unzip git ansible -yq"
       ]
     },
     {
-      "type": "ansible",
+      "type": "ansible-local",
       "playbook_file": "./ansible-playbook-tf-kube/playbook.yml",
       "galaxy_file": "./ansible-playbook-tf-kube/roles/requirements.yml"
     }
