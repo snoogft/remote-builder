@@ -13,8 +13,9 @@
       "ssh_username": "packer",
       "zone": "{{user `zone`}}",
       "machine_type": "f1-micro",
+      "labels": { "purpose":"remote-builder" },
       "omit_external_ip": "true",
-      "labels": { "purpose":"remote-builder" }
+      "use_internal_ip": "true"
     }
   ],
   "provisioners": [
