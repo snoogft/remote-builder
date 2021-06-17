@@ -14,20 +14,20 @@ RETRIES=${RETRIES:-10}
 
 # Always delete instance after attempting build
 function cleanup {
-    "${GCLOUD}" compute instances delete "${INSTANCE_NAME}" --quiet
+    ${GCLOUD} compute instances delete ${INSTANCE_NAME} --quiet
 }
 
 # Run command on the instance via ssh
 function ssh {
-    "${GCLOUD}" compute ssh "${SSH_ARGS}" --ssh-key-file="${KEYNAME}" \
-         "${USERNAME}"@"${INSTANCE_NAME}" -- "$1"
+    ${GCLOUD} compute ssh ${SSH_ARGS} --ssh-key-file=${KEYNAME} \
+         ${USERNAME}@${INSTANCE_NAME} -- $1
 }
 
-"${GCLOUD}" config set compute/zone "${ZONE}"
+${GCLOUD} config set compute/zone ${ZONE}
 
 KEYNAME=builder-key
 # TODO Need to be able to detect whether a ssh key was already created
-ssh-keygen -t rsa -N "" -f "${KEYNAME}" -C "${USERNAME}" || true
+ssh-keygen -t rsa -N "" -f ${KEYNAME} -C ${USERNAME} || true
 chmod 400 ${KEYNAME}*
 
 cat > ssh-keys <<EOF
@@ -49,11 +49,11 @@ while [ "$(ssh 'printf pass')" != "pass" ]; do
     exit 1
   fi
   sleep 10
-  RETRY_COUNT=$((RETRY_COUNT+1))
+  RETRY_COUNT=$(($RETRY_COUNT+1))
 done
 
-${GCLOUD} compute scp "${SSH_ARGS}" --compress --recurse \
-       "$(pwd)" "${USERNAME}"@"${INSTANCE_NAME}":"${REMOTE_WORKSPACE}" \
+${GCLOUD} compute scp ${SSH_ARGS} --compress --recurse \
+       $(pwd) ${USERNAME}@${INSTANCE_NAME}:${REMOTE_WORKSPACE} \
        --ssh-key-file=${KEYNAME}
 
 ssh "${COMMAND}"
