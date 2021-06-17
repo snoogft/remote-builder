@@ -35,7 +35,7 @@ ${USERNAME}:$(cat ${KEYNAME}.pub)
 EOF
 
 ${GCLOUD} compute instances create \
-       "${INSTANCE_ARGS}" "${INSTANCE_NAME}" \
+       ${INSTANCE_ARGS} ${INSTANCE_NAME} \
        --metadata block-project-ssh-keys=TRUE \
        --metadata-from-file ssh-keys=ssh-keys
 
