@@ -21,7 +21,9 @@
       "type": "shell",
       "inline": [
         "sudo DEBIAN_FRONTEND=noninteractive apt-get update",
-        "sudo apt-get install unzip git ansible -yq"
+        "sudo apt-get install unzip git ansible curl -yq",
+        "sudo curl -o /usr/local/bin/kpt 'https://storage.googleapis.com/kpt-dev/latest/linux_amd64/kpt'",
+        "sudo chmod +x /usr/local/bin/kpt"
       ]
     },
     {

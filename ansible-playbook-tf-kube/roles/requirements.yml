@@ -1,2 +1,3 @@
 - src: diodonfrost.terraform
 - src: andrewrothstein.kubectl
+- src: andrewrothstein.kustomize
