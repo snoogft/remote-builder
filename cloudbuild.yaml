@@ -5,11 +5,9 @@ steps:
    - id: 'build remote-builder disk image'
      name: 'hashicorp/packer:${_PACKER_VERSION}'
      args: [ 'build', '-var', 'project_id=$PROJECT_ID', '-var', 'zone=$_ZONE', 'remote-builder-infra.json']
-     waitFor: ['-']
    - id: 'build skaffold-runner'
      name: 'hashicorp/packer:${_PACKER_VERSION}'
      args: [ 'build', '-var', 'project_id=$PROJECT_ID', '-var', 'zone=$_ZONE', 'remote-skaffold-runner.json']
-     waitFor: ['-']
 images: ['eu.gcr.io/$PROJECT_ID/remote-builder']
 timeout: 900s
 substitutions:
