@@ -1,0 +1,8 @@
+---
+- name: 'Install skaffold'
+  hosts: 127.0.0.1
+  connection: local
+  become: true
+  roles:
+    - { role: andrewrothstein.kubectl, kubectl_ver: v1.20.6 }
+    - { role: andrewrothstein.skaffold, skaffold_ver: v1.26.1 }
