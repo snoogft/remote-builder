@@ -4,6 +4,6 @@
   connection: local
   become: true
   roles:
-    - { role: diodonfrost.terraform, terraform_version: 0.14.11 }
+    - { role: andrewrothstein.terraform, terraform_ver: 0.14.11 }
     - { role: andrewrothstein.kubectl, kubectl_ver: v1.20.6 }
     - { role: andrewrothstein.kustomize, kustomize_ver: v4.1.2 }
